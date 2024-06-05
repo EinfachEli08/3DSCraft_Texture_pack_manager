@@ -95,22 +95,33 @@ fun parseZipFile(zipFilePath: String): List<ZipContent> {
     val rootContents = mutableListOf<ZipContent>()
     val directoryMap = mutableMapOf<String, MutableList<ZipContent>>()
 
+    // Initialize the root directory in the map
+    directoryMap[""] = rootContents
+
     zipFile.use { zip ->
         zip.entries().asSequence().forEach { entry ->
-            val entryName = entry.name
+            val entryName = entry.name.trimEnd('/')
             val parts = entryName.split("/")
 
-            var currentDirectoryContents = directoryMap.getOrPut("", { mutableListOf() })
+            var currentDirectoryContents = rootContents
+            var currentPath = ""
 
             for (i in parts.indices) {
                 val part = parts[i]
-                if (i == parts.size - 1 && !entry.isDirectory) {
+                val isLastPart = i == parts.size - 1
+
+                if (currentPath.isEmpty()) {
+                    currentPath = part
+                } else {
+                    currentPath += "/$part"
+                }
+
+                if (isLastPart && !entry.isDirectory) {
                     // It's a file
                     currentDirectoryContents.add(ZipContent.File(part))
                 } else {
                     // It's a directory
-                    val path = parts.subList(0, i ).joinToString("/")
-                    val nextDirectoryContents = directoryMap.getOrPut(path, { mutableListOf() })
+                    val nextDirectoryContents = directoryMap.getOrPut(currentPath) { mutableListOf() }
                     if (!currentDirectoryContents.any { it is ZipContent.Directory && it.name == part }) {
                         currentDirectoryContents.add(ZipContent.Directory(part, nextDirectoryContents))
                     }
@@ -120,5 +131,5 @@ fun parseZipFile(zipFilePath: String): List<ZipContent> {
         }
     }
 
-    return directoryMap[""] ?: rootContents
+    return rootContents
 }
