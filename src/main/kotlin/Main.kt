@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Card
@@ -50,22 +52,20 @@ data class NavigationItem(val title: String, val icon: ImageVector, val badgeCou
 
 @Composable
 @Preview
-
-
-
 fun App() {
     var selectedFileName by remember { mutableStateOf<String?>(null) }
     var showAlert by remember { mutableStateOf(false) }
+    var showAppInfo by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableIntStateOf(0) }
     var zipContent by remember { mutableStateOf<List<ZipContent>?>(null) }
+
+    val ver = "0.1"
     val selectedFileContent by remember { mutableStateOf<String?>(null) }
     val navigationItems = listOf(
         NavigationItem("Home", Icons.Filled.Home, badgeCount = 3),
         NavigationItem("Pack Gallery", Icons.Filled.ShoppingCart),
         NavigationItem("Settings", Icons.Filled.Settings)
     )
-
-
 
     val content: @Composable () -> Unit = when (selectedItem) {
         0 -> {
@@ -83,7 +83,7 @@ fun App() {
 
                         Row(
                             modifier = Modifier.fillMaxSize(),
-                            horizontalArrangement  = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
 
                             Box(
@@ -105,21 +105,22 @@ fun App() {
 
                             Spacer(modifier = Modifier.height(8.dp))
 
+                            val selectedFileContent = selectedFileName ?: ""
+                            val fileName = selectedFileContent.substringBeforeLast(".zip").substringAfterLast("\\")
+
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .weight(1f)
                             ) {
                                 Text(
-                                    text = "File Viewer",
+                                    text = fileName,
                                     textAlign = TextAlign.Center,
-
                                 )
+                                //here
                             }
-
-
-
                         }
+
                         LinearDeterminateIndicator()
                     }
                 }
@@ -166,7 +167,6 @@ fun App() {
                             Icon(Icons.Filled.Add, contentDescription = "Add")
                         }
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
                     navigationItems.forEachIndexed { index, item ->
                         NavigationRailItem(
                             icon = {
@@ -184,10 +184,49 @@ fun App() {
                             alwaysShowLabel = false
                         )
                     }
+                    Spacer(modifier = Modifier.weight(1f))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 12.dp, bottom = 12.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TextButton(onClick = {
+                            showAppInfo = true
+                        }, shape = CircleShape) {
+                            Icon(Icons.Outlined.Info, contentDescription = "Info")
+                        }
+                    }
                 }
             }
 
             MainContent(content)
+
+            if(showAppInfo){
+                AlertDialog(
+                    onDismissRequest = { showAppInfo = false },
+                    title = { Text(text = "About") },
+                    text = {
+                        Column {
+                            Text(text = "3DSCraft Texture Manager")
+                            Text(text = "")
+                            Text(text = "Gui Application written by:")
+                            Text(text = "SomeRandoLameo")
+                            Text(text = "")
+                            Text(text = "Backend script for Packing written by:")
+                            Text(text = "Moddimation")
+                            Text(text = "")
+                            Text(text = "Manager version: " + ver)
+                        }
+
+                           },
+                    confirmButton = {
+                        TextButton(onClick = { showAppInfo = false }) {
+                            Text("OK")
+                        }
+                    }
+                )
+            }
 
             if (showAlert) {
                 AlertDialog(
@@ -270,6 +309,8 @@ fun openFilePicker(onFileSelected: (String?, Boolean) -> Unit) {
     }
     frame.dispose()
 }
+
+
 
 fun main() = application {
     Window(

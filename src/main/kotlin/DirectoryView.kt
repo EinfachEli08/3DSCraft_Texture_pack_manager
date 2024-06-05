@@ -109,7 +109,7 @@ fun parseZipFile(zipFilePath: String): List<ZipContent> {
                     currentDirectoryContents.add(ZipContent.File(part))
                 } else {
                     // It's a directory
-                    val path = parts.subList(0, i + 1).joinToString("/")
+                    val path = parts.subList(0, i ).joinToString("/")
                     val nextDirectoryContents = directoryMap.getOrPut(path, { mutableListOf() })
                     if (!currentDirectoryContents.any { it is ZipContent.Directory && it.name == part }) {
                         currentDirectoryContents.add(ZipContent.Directory(part, nextDirectoryContents))
