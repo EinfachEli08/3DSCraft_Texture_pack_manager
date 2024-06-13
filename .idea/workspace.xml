@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffa4829c-bbce-41c1-8681-e7fa27d7db16" name="Changes" comment="test">
+    <list default="true" id="ffa4829c-bbce-41c1-8681-e7fa27d7db16" name="Changes" comment="WIP: adding Repo management for Resource pack gallery">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DirectoryView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/DirectoryView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +63,20 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;EinfachEli08&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="cb556f44-682c-4886-b245-d1dd320e2a95" />
+        <option name="url" value="https://github.com/EinfachEli08/3DSCraft_Texture_pack_manager.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
@@ -137,12 +150,39 @@
       <option name="project" value="LOCAL" />
       <updated>1717603462072</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added Folder name text label on right hand side">
+      <option name="closed" value="true" />
+      <created>1717625908708</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717625908708</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed a small issue with directory title&#10;TODO: Move directory out one, because root directory isn`t listed">
+      <option name="closed" value="true" />
+      <created>1717627971552</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717627971552</updated>
+    </task>
+    <task id="LOCAL-00007" summary="WIP: adding Repo management for Resource pack gallery">
+      <option name="closed" value="true" />
+      <created>1718268960818</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718268960819</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="added Folder name text label on right hand side" />
+    <MESSAGE value="fixed a small issue with directory title&#10;TODO: Move directory out one, because root directory isn`t listed" />
+    <MESSAGE value="WIP: adding Repo management for Resource pack gallery" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP: adding Repo management for Resource pack gallery" />
   </component>
 </project>

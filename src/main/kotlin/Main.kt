@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.icons.Icons
@@ -21,12 +22,12 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -51,6 +52,7 @@ import java.awt.FileDialog
 import java.awt.Frame
 import java.io.File
 
+
 data class NavigationItem(val title: String, val icon: ImageVector, val badgeCount: Int? = null)
 
 @Composable
@@ -62,7 +64,7 @@ fun App() {
     var selectedItem by remember { mutableIntStateOf(0) }
     var zipContent by remember { mutableStateOf<List<ZipContent>?>(null) }
 
-    val ver = "0.1"
+    val ver = "0.1_dev"
     val selectedFileContent by remember { mutableStateOf<String?>(null) }
     val navigationItems = listOf(
         NavigationItem("Home", Icons.Filled.Home, badgeCount = 3),
@@ -74,7 +76,9 @@ fun App() {
         0 -> {
             {
                 if (selectedFileName == null) {
-                    Text("Press + to import a new resource pack")
+                    Row {
+                        Text("Press + to import a new resource pack")
+                    }
                 } else {
                     selectedFileName?.let {
                         Text(
@@ -134,25 +138,28 @@ fun App() {
             {
                 Row (
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+
                 ){
                     Text("Resource pack gallery")
-                    Row (horizontalArrangement = Arrangement.SpaceBetween) {
-                        if(Repository().repo != ""){
-                            Text("Repository:" + Repository().repo)
-                        }else{
-                            Text("No repository set!")
-                        }
-                        IconButton(
-                            onClick = { println("auf zum SettingsView") },
 
-                        ) {
+                    if(Repository().repo != ""){
+                        Text("Repository:" + Repository().repo)
+                    }else{
+                        TextButton(
+
+                            onClick = { selectedItem = 2 },
+
+                            ) {
+                            Text("No repository set!")
+                            Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                             Icon(
                                 imageVector = Icons.Filled.Edit,
                                 contentDescription = "Edit",
-                                tint = MaterialTheme.colorScheme.onPrimary
-                            )
+
+                                )
                         }
+
                     }
 
                 }
@@ -183,6 +190,7 @@ fun App() {
                         contentAlignment = Alignment.Center
                     ) {
                         FloatingActionButton(onClick = {
+                            selectedItem = 0
                             openFilePicker { fileName, isZip ->
                                 if (isZip) {
                                     selectedFileName = fileName
