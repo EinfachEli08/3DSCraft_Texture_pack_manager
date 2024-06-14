@@ -36,7 +36,6 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -208,7 +207,7 @@ fun App() {
                     }
 
                 }
-
+                LinearDeterminateIndicator()
 
             }
         }
@@ -241,6 +240,7 @@ fun App() {
                         }
                     }
                 }
+                LinearDeterminateIndicator()
             }
         }
 
@@ -250,7 +250,7 @@ fun App() {
     }
 
     MaterialTheme(
-        colorScheme = darkColorScheme()
+        colorScheme =   darkScheme
     ) {
         Row {
             NavigationRail {

@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffa4829c-bbce-41c1-8681-e7fa27d7db16" name="Changes" comment="WIP: adding Repo management for Resource pack gallery pt.3 : Added GUI for Repo management.&#10;&#10;TODO: Fix bug -&gt; Repo Placeholders overwrite themselves &amp; deleting will delete from the Bottom to Top and not deleting the selected Item">
-      <change afterPath="$PROJECT_DIR$/repo_structure.md" afterDir="false" />
+    <list default="true" id="ffa4829c-bbce-41c1-8681-e7fa27d7db16" name="Changes" comment="Added gudance rules for resource pack repositories">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718393725341</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added gudance rules for resource pack repositories">
+      <option name="closed" value="true" />
+      <created>1718397734445</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718397734445</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -205,6 +213,7 @@
     <MESSAGE value="WIP: adding Repo management for Resource pack gallery" />
     <MESSAGE value="WIP: adding Repo management for Resource pack gallery pt.2" />
     <MESSAGE value="WIP: adding Repo management for Resource pack gallery pt.3 : Added GUI for Repo management.&#10;&#10;TODO: Fix bug -&gt; Repo Placeholders overwrite themselves &amp; deleting will delete from the Bottom to Top and not deleting the selected Item" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP: adding Repo management for Resource pack gallery pt.3 : Added GUI for Repo management.&#10;&#10;TODO: Fix bug -&gt; Repo Placeholders overwrite themselves &amp; deleting will delete from the Bottom to Top and not deleting the selected Item" />
+    <MESSAGE value="Added gudance rules for resource pack repositories" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added gudance rules for resource pack repositories" />
   </component>
 </project>
