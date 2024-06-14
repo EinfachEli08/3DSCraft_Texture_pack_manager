@@ -1,0 +1,24 @@
+{
+    "packs": {
+        "respack1_name": {
+            "zipfile": "respack1_name.zip",
+            "preview": "respack1_name_icon.png",
+	        "content": "respack1_name_info.meta"
+        },
+        "respack2_name": {
+            "zipfile": "respack2_name.zip",
+            "preview": "respack2_name_icon.png",
+	        "content": "respack2_name_info.meta"
+        },
+        "respack3_name": {
+            "zipfile": "respack3_name.zip",
+            "preview": "respack3_icon.png",
+            "content": "respack3_info.meta"
+        },
+        "respack4_name": {
+            "zipfile": "respack4_name.zip",
+            "preview": "respack4_name_icon.png",
+	        "content": "respack4_name_info.meta"
+        }
+     }
+}
