@@ -1,12 +1,28 @@
 package online
 
+data class Repo(val url: String, var placeholder: String) // placeholder is now mutable
+
 class Repository {
-    private var _current: String = ""
+    private val _repoList = ArrayList<Repo>()
 
-    var repo: String
-        get() = _current
-        set(value) {
-            _current = value
+    val repoList: List<Repo>
+        get() = _repoList
+
+    fun addRepo(repo: Repo) {
+        _repoList.add(repo)
+    }
+
+    fun getRepo(index: Int): Repo {
+        return _repoList[index]
+    }
+
+    fun getRepoLength(): Int {
+        return _repoList.size
+    }
+
+    fun removeRepoAtIndex(index: Int) {
+        if (index in 0 until _repoList.size) {
+            _repoList.removeAt(index)
         }
+    }
 }
-

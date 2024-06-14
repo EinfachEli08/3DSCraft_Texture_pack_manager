@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.icons.Icons
@@ -22,6 +24,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -47,6 +50,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import online.Repo
+import online.RepoItem
 import online.Repository
 import java.awt.FileDialog
 import java.awt.Frame
@@ -71,6 +76,15 @@ fun App() {
         NavigationItem("Pack Gallery", Icons.Filled.ShoppingCart),
         NavigationItem("Settings", Icons.Filled.Settings)
     )
+
+    val repository = remember { Repository().apply {
+        addRepo(Repo("https://github.com/user1/repo1", "Demo repo"))
+        addRepo(Repo("https://github.com/user1/repo2", "Demo repo"))
+        addRepo(Repo("https://github.com/user1/repo3", "Demo repo"))
+    } }
+
+    var repoList by remember { mutableStateOf(repository.repoList.toList()) }
+
 
     val content: @Composable () -> Unit = when (selectedItem) {
         0 -> {
@@ -143,15 +157,46 @@ fun App() {
                 ){
                     Text("Resource pack gallery")
 
-                    if(Repository().repo != ""){
-                        Text("Repository:" + Repository().repo)
+
+                    if(repository.repoList.isNotEmpty()){
+                        if(repository.repoList.size > 1){
+                            TextButton(
+
+                                onClick = { selectedItem = 2 },
+
+                                ) {
+                                Text(repository.repoList.size.toString().plus(" Repositories set"))
+                                Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
+                                Icon(
+                                    imageVector = Icons.Filled.Edit,
+                                    contentDescription = "Edit",
+
+                                    )
+                            }
+
+                        }else{
+                            TextButton(
+
+                                onClick = { selectedItem = 2 },
+
+                                ) {
+                                Text(repository.repoList.size.toString().plus(" Repository set"))
+                                Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
+                                Icon(
+                                    imageVector = Icons.Filled.Edit,
+                                    contentDescription = "Edit",
+
+                                    )
+                            }
+
+                        }
                     }else{
                         TextButton(
 
                             onClick = { selectedItem = 2 },
 
                             ) {
-                            Text("No repository set!")
+                            Text("No repositories set!")
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
                             Icon(
                                 imageVector = Icons.Filled.Edit,
@@ -169,7 +214,34 @@ fun App() {
         }
 
         2 -> {
-            { Text("Settings") }
+            {
+                Column {
+                    Button(onClick = {
+                        repository.addRepo(Repo("","Place Repo URL Here"))
+                        repoList = repository.repoList.toList()
+                    }) {
+                        Text("Add Repository")
+                    }
+
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        itemsIndexed(repoList) { index, repo ->
+                            RepoItem(
+                                repo = repo,
+                                onDelete = {
+                                    repository.removeRepoAtIndex(index)
+                                    repoList = repository.repoList.toList()
+                                },
+                                onRepoChange = { newRepo ->
+                                    repository.removeRepoAtIndex(index)
+                                    val newRepoObject = Repo(newRepo, repo.placeholder) // Use existing placeholder
+                                    repository.addRepo(newRepoObject)
+                                    repoList = repository.repoList.toList()
+                                }
+                            )
+                        }
+                    }
+                }
+            }
         }
 
         else -> {
